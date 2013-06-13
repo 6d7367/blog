@@ -1,0 +1,33 @@
+{include="header"}
+<body>
+<div id="container">
+  <div id="header">
+    <h1><a href="/">blog<strong>.LOC</strong></a></h1>
+    <h2>For all your blogging needs.</h2>
+    <ul id="nav">
+      <li><a href="/" accesskey="h"><em>H</em>ome</a></li>
+      <li><a href="#css" title="CSS and XHTML (a:c)" accesskey="c"><em>c</em>ss &amp; xhtml</a></li>
+      <li><a href="#about" title="All about me (a:a)" accesskey="a"><em>A</em>bout the author</a></li>
+      <li><a href="#contact" title="Get in Touch (a:o)" accesskey="o">C<em>o</em>ntact</a></li>
+    </ul>
+  </div>
+  <div id="sidebar">
+    <h1>Last Entries</h1>
+    <ul class="submenu">
+      {loop="sidebar"}
+        <li><a href="/blog/view/{$value.id}">{$value.title}</a></li>
+      {/loop}
+    </ul>
+    <p class="note"> Here is a special paragraph for any important notes that you might want to display. </p>
+  </div>
+  <div id="content">
+      {if condition="$type == 'list'"}
+        {include="list"}
+      {/if}
+      {if condition="$type == 'view'"}
+        {include="view"}
+      {/if}
+  </div>
+{include="footer"}
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{loop="list"}
+    <h1>
+        <a href="/blog/view/{$value.id}">{$value.title}</a>
+    </h1>
+    <div>
+        {function="substr($value.content, 0, 500)"}...
+    </div>
+    <div class="article_menu">
+        <b>Posted on {$value.created_at}</b>
+        <a href="/blog/view/{$value.id}">Read all</a>
+    </div>
+{/loop}
