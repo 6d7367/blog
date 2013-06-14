@@ -62,7 +62,14 @@ class Controller_Admin extends Controller
 
     public function action_add()
     {
+        $e = Model::factory('Blog')->create();
 
+        $e->title = $this->getPost('title');
+        $e->content = $this->getPost('content');
+
+        $e->created_at = date("Y-m-d H:i:s");
+
+        $e->save();
     }
 
     public function action_update()

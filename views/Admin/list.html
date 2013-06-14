@@ -2,6 +2,11 @@
 
 globalEditorContent = '';
 
+function toggleAddDiv()
+{
+    $("#add_div").toggle();
+}
+
 function toggleComments(div)
 {
     $(div).toggle();
@@ -65,10 +70,36 @@ function saveEdit(entry_id)
     $('#hidden_content' + entry_id).hide()
 }
 
+function add_save()
+{
+    $.ajax({
+        type: "POST",
+        url: '/admin/add',
+        data: {title: $("#add_title").val(), content: globalEditorContent = tinymce.get('add_content').getContent()}
+    });
+
+    $.ajax({
+        url: "",
+        context: document.body,
+        success: function(s,x){
+            $(this).html(s);
+        }
+    });
+}
+
+function add_cancel()
+{
+    $("#add_title").val('');
+    globalEditorContent = tinymce.get('add_content').setContent('');
+    $("#add_div").hide();
+
+}
+
 
 $(function()
 {
     $(".comments").hide();
+    $("#add_div").hide();
 })
 </script>
 <style>
@@ -78,6 +109,40 @@ $(function()
 }
 </style>
 <div>
+    <h1 onclick="toggleAddDiv()">Add new article (Show/Hide)</h1>
+    <div id='add_div'>
+        <table>
+            <tr>
+                <td>
+                    Title:
+                </td>
+                <td>
+                    <input type='text' name='title' id='add_title'/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Content:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea id='add_content'></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type='button' value='Save' onclick="add_save()"/>
+                </td>
+                <td>
+                    <input type='button' value='Cancel' onclick="add_cancel();"/>
+                </td>
+            </tr>
+        </table>
+    </div>
     {loop="list"}
         <div id='entry{$value.id}'>
             <p>

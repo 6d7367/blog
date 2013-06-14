@@ -108,6 +108,14 @@ class Framework
 
             return $data;
         }
+        elseif (count($request) == 1)
+        {
+            echo 'test';die;
+            $data['controller'] = $request[0];
+            $data['action'] = 'index';
+        }
+
+        echo 'test2';die;
         // иначе возбудить исключение
 
         throw new Exception('Controller does not recognized!');
